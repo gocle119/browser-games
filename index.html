@@ -113,14 +113,16 @@
         </div>
       </a>
 
-      <div class="coming-soon-card">
-        <div class="game-icon">🔤</div>
+      <a class="game-card active-game" href="games/the-impostor/index.html">
+        <div class="game-icon">🕵️</div>
         <div class="game-info">
-          <div class="game-name">The Impostor</div>
-          <div class="game-desc">Find the word that doesn't share the hidden connection.</div>
+          <div class="game-name">The Impostor <span class="badge">Play</span></div>
+          <div class="game-desc">Three words share a hidden connection. One doesn't. Tap the impostor.</div>
         </div>
-        <div class="game-meta"><span class="badge" style="background:var(--surface2);color:var(--text-muted)">Soon</span></div>
-      </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-the-impostor">Best<br><strong>—</strong></div>
+        </div>
+      </a>
 
       <div class="coming-soon-card">
         <div class="game-icon">🎴</div>
@@ -165,10 +167,11 @@
 
   <script src="shared/scores.js"></script>
   <script>
-    const pb = Scores.getPersonalBest('real-or-fake');
-    if (pb > 0) {
-      document.getElementById('pb-real-or-fake').innerHTML = `Best<br><strong>${pb}</strong>`;
-    }
+    const pb1 = Scores.getPersonalBest('real-or-fake');
+    if (pb1 > 0) document.getElementById('pb-real-or-fake').innerHTML = `Best<br><strong>${pb1}</strong>`;
+
+    const pb2 = Scores.getPersonalBest('the-impostor');
+    if (pb2 > 0) document.getElementById('pb-the-impostor').innerHTML = `Best<br><strong>${pb2}</strong>`;
   </script>
 </body>
 </html>
