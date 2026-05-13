@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Vault — Browser Games</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { padding-bottom: 40px; }
+
+    .games-section { margin-top: 28px; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      padding: 0 2px;
+    }
+
+    .game-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .game-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.15s, transform 0.1s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .game-card:active { transform: scale(0.98); }
+    .game-card.active-game { border-color: var(--accent); }
+
+    .game-icon {
+      font-size: 2rem;
+      width: 52px;
+      height: 52px;
+      background: var(--surface2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .game-info { flex: 1; min-width: 0; }
+    .game-name { font-weight: 800; font-size: 1rem; }
+    .game-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+
+    .game-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .game-pb { font-size: 0.7rem; color: var(--text-muted); }
+    .game-pb strong { color: var(--accent); font-size: 0.85rem; }
+
+    .coming-soon-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      opacity: 0.45;
+    }
+    .coming-soon-card .game-icon { font-size: 1.6rem; }
+
+    .divider {
+      margin: 28px 0 20px;
+      border: none;
+      border-top: 1px solid var(--surface2);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-top: 40px;
+      padding: 0 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <h1>Word <span>Vault</span></h1>
+      <p>Simple word games · Track your best scores</p>
+    </header>
+
+    <div class="section-label">Word Games</div>
+    <div class="game-row" id="word-games">
+      <a class="game-card active-game" href="games/real-or-fake/index.html">
+        <div class="game-icon">🧠</div>
+        <div class="game-info">
+          <div class="game-name">Real or Fake? <span class="badge">Play</span></div>
+          <div class="game-desc">Is this an actual English word? Tap to decide — the answers might surprise you.</div>
+        </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-real-or-fake">Best<br><strong>—</strong></div>
+        </div>
+      </a>
+
+      <div class="coming-soon-card">
+        <div class="game-icon">🔤</div>
+        <div class="game-info">
+          <div class="game-name">The Impostor</div>
+          <div class="game-desc">Find the word that doesn't share the hidden connection.</div>
+        </div>
+        <div class="game-meta"><span class="badge" style="background:var(--surface2);color:var(--text-muted)">Soon</span></div>
+      </div>
+
+      <div class="coming-soon-card">
+        <div class="game-icon">🎴</div>
+        <div class="game-info">
+          <div class="game-name">Anagram Tiles</div>
+          <div class="game-desc">Tap scrambled letter tiles in the right order.</div>
+        </div>
+        <div class="game-meta"><span class="badge" style="background:var(--surface2);color:var(--text-muted)">Soon</span></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-label">More Categories — Coming Soon</div>
+    <div class="category-grid">
+      <div class="category-tile disabled">
+        <div class="category-icon">♟️</div>
+        <div class="category-name">Strategy</div>
+        <div class="category-count">0 games</div>
+      </div>
+      <div class="category-tile disabled">
+        <div class="category-icon">🃏</div>
+        <div class="category-name">Card Games</div>
+        <div class="category-count">0 games</div>
+      </div>
+      <div class="category-tile disabled">
+        <div class="category-icon">🕹️</div>
+        <div class="category-name">Arcade</div>
+        <div class="category-count">0 games</div>
+      </div>
+      <div class="category-tile disabled">
+        <div class="category-icon">🧩</div>
+        <div class="category-name">Puzzles</div>
+        <div class="category-count">0 games</div>
+      </div>
+    </div>
+
+    <footer>
+      Scores saved on this device · No account needed
+    </footer>
+  </div>
+
+  <script src="shared/scores.js"></script>
+  <script>
+    const pb = Scores.getPersonalBest('real-or-fake');
+    if (pb > 0) {
+      document.getElementById('pb-real-or-fake').innerHTML = `Best<br><strong>${pb}</strong>`;
+    }
+  </script>
+</body>
+</html>

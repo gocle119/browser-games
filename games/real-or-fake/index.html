@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Real or Fake? — Word Vault</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <a class="back-btn" href="../../index.html">← Home</a>
+    <div class="hud">
+      <div class="hud-item">
+        <span class="hud-label">Lives</span>
+        <span class="hud-value" id="lives">❤️❤️❤️</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Score</span>
+        <span class="hud-value" id="score">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Streak</span>
+        <span class="hud-value" id="streak">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timer bar -->
+  <div class="timer-track">
+    <div id="timer-bar"></div>
+  </div>
+
+  <!-- Game area -->
+  <div id="game-area">
+    <div class="word-stage">
+      <div class="prompt">Is this a real English word?</div>
+      <div id="word"></div>
+    </div>
+
+    <div class="answer-buttons">
+      <button class="answer-btn" id="btn-real">
+        <span class="btn-icon">✅</span>
+        <span class="btn-label">REAL</span>
+        <span class="key-hint">Press R or →</span>
+      </button>
+      <button class="answer-btn" id="btn-fake">
+        <span class="btn-icon">❌</span>
+        <span class="btn-label">FAKE</span>
+        <span class="key-hint">Press F or ←</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Feedback overlay (hidden during play) -->
+  <div class="feedback-overlay" id="feedback" hidden>
+    <div id="feedback-text"></div>
+    <div id="feedback-sub"></div>
+  </div>
+
+  <!-- End screen -->
+  <div id="end-screen" hidden>
+    <div class="end-header">
+      <h2>Game Over</h2>
+      <p>Here's how you did</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-val" id="end-score">0</div>
+        <div class="stat-lbl">Score</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="end-streak">0</div>
+        <div class="stat-lbl">Best Streak</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="end-best">0</div>
+        <div class="stat-lbl">Personal Best</div>
+      </div>
+    </div>
+
+    <div class="lb-title">Your Top Scores</div>
+    <div id="leaderboard"></div>
+
+    <button class="btn btn-accent btn-full" id="btn-play-again">Play Again</button>
+    <a class="btn btn-ghost btn-full" href="../../index.html">Back to Home</a>
+  </div>
+
+  <script src="../../shared/scores.js"></script>
+  <script src="words.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
