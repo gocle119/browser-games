@@ -167,6 +167,7 @@ body {
   padding: 24px;
   text-align: center;
   z-index: 10;
+  cursor: pointer;
   animation: fadeIn 0.15s ease-out;
 }
 @keyframes fadeIn {

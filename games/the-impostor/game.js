@@ -10,6 +10,7 @@
   let timerInterval = null;
   let timerStart    = null;
   let answered      = false;
+  let feedbackTimeout = null;
 
   // DOM refs
   const livesEl      = document.getElementById('lives');
@@ -31,6 +32,8 @@
   const leaderboardEl = document.getElementById('leaderboard');
 
   function startGame() {
+    clearTimeout(feedbackTimeout);
+    feedbackTimeout = null;
     state = {
       puzzles:    getPuzzles(),
       index:      0,
@@ -38,7 +41,6 @@
       streak:     0,
       bestStreak: 0,
       lives:      LIVES_MAX,
-      // each puzzle gets its words shuffled for display; track the shuffled order
       displayOrder: [],
     };
     endScreen.hidden = true;
@@ -166,9 +168,9 @@
 
     const delay = state.lives <= 0 ? 2000 : 1600;
     if (state.lives <= 0) {
-      setTimeout(endGame, delay);
+      feedbackTimeout = setTimeout(endGame, delay);
     } else {
-      setTimeout(() => {
+      feedbackTimeout = setTimeout(() => {
         feedbackEl.hidden = true;
         nextPuzzle();
       }, delay);
@@ -203,6 +205,16 @@
       </div>`
     ).join('');
   }
+
+  // Tap feedback bar to advance immediately
+  feedbackEl.addEventListener('click', () => {
+    if (feedbackEl.hidden) return;
+    clearTimeout(feedbackTimeout);
+    feedbackTimeout = null;
+    feedbackEl.hidden = true;
+    if (state.lives <= 0) endGame();
+    else nextPuzzle();
+  });
 
   // Tile click listeners
   tiles.forEach((tile, slot) => {

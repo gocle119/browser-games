@@ -10,6 +10,7 @@
   let timerInterval = null;
   let timerStart = null;
   let answering = false;
+  let feedbackTimeout = null;
 
   // DOM refs
   const wordEl        = document.getElementById('word');
@@ -30,6 +31,8 @@
   const btnFake       = document.getElementById('btn-fake');
 
   function startGame() {
+    clearTimeout(feedbackTimeout);
+    feedbackTimeout = null;
     state = {
       words: shuffleWords(),
       index: 0,
@@ -131,9 +134,9 @@
     }
 
     if (state.lives <= 0) {
-      setTimeout(endGame, 1800);
+      feedbackTimeout = setTimeout(endGame, 1800);
     } else {
-      setTimeout(() => {
+      feedbackTimeout = setTimeout(() => {
         feedbackEl.hidden = true;
         nextWord();
       }, 1800);
@@ -172,6 +175,16 @@
       </div>`
     ).join('');
   }
+
+  // Tap feedback overlay to advance immediately
+  feedbackEl.addEventListener('click', () => {
+    if (feedbackEl.hidden) return;
+    clearTimeout(feedbackTimeout);
+    feedbackTimeout = null;
+    feedbackEl.hidden = true;
+    if (state.lives <= 0) endGame();
+    else nextWord();
+  });
 
   // Button listeners
   btnReal.addEventListener('click', () => handleAnswer(true));
