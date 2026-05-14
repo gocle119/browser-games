@@ -66,6 +66,7 @@
     }
     .game-pb { font-size: 0.7rem; color: var(--text-muted); }
     .game-pb strong { color: var(--accent); font-size: 0.85rem; }
+    .game-plays { font-size: 0.7rem; color: var(--text-muted); text-align: right; }
 
     .coming-soon-card {
       background: var(--surface);
@@ -110,6 +111,7 @@
         </div>
         <div class="game-meta">
           <div class="game-pb" id="pb-real-or-fake">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-real-or-fake"></div>
         </div>
       </a>
 
@@ -121,6 +123,7 @@
         </div>
         <div class="game-meta">
           <div class="game-pb" id="pb-the-impostor">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-the-impostor"></div>
         </div>
       </a>
 
@@ -165,13 +168,23 @@
     </footer>
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="shared/scores.js"></script>
+  <script src="shared/counter.js"></script>
   <script>
     const pb1 = Scores.getPersonalBest('real-or-fake');
     if (pb1 > 0) document.getElementById('pb-real-or-fake').innerHTML = `Best<br><strong>${pb1}</strong>`;
 
     const pb2 = Scores.getPersonalBest('the-impostor');
     if (pb2 > 0) document.getElementById('pb-the-impostor').innerHTML = `Best<br><strong>${pb2}</strong>`;
+
+    PlayCounter.getAll().then(counts => {
+      ['real-or-fake', 'the-impostor'].forEach(id => {
+        const el = document.getElementById(`plays-${id}`);
+        if (el && counts[id] > 0) el.textContent = counts[id].toLocaleString() + ' plays';
+      });
+    });
   </script>
 </body>
 </html>

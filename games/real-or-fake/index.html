@@ -82,14 +82,25 @@
       </div>
     </div>
 
-    <div class="lb-title">Your Top Scores</div>
+    <div class="lb-title">🌍 Global Top Scores</div>
+    <div id="global-leaderboard"><div class="lb-loading">Loading…</div></div>
+
+    <div class="global-submit">
+      <input type="text" id="player-name" maxlength="10" placeholder="Your name" autocomplete="off">
+      <button class="btn btn-accent" id="btn-submit-score">Submit</button>
+    </div>
+
+    <div class="lb-title">Your Scores</div>
     <div id="leaderboard"></div>
 
     <button class="btn btn-accent btn-full" id="btn-play-again">Play Again</button>
     <a class="btn btn-ghost btn-full" href="../../index.html">Back to Home</a>
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="../../shared/scores.js"></script>
+  <script src="../../shared/counter.js"></script>
   <script src="words.js"></script>
   <script src="game.js"></script>
 </body>

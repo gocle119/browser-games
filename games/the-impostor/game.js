@@ -34,6 +34,7 @@
   function startGame() {
     clearTimeout(feedbackTimeout);
     feedbackTimeout = null;
+    PlayCounter.increment(GAME_ID);
     state = {
       puzzles:    getPuzzles(),
       index:      0,
@@ -197,6 +198,13 @@
     endStreak.textContent = state.bestStreak;
     endBest.textContent   = pb;
 
+    const nameInput = document.getElementById('player-name');
+    nameInput.value = localStorage.getItem('player_name') || '';
+    const submitBtn = document.getElementById('btn-submit-score');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Submit';
+    renderGlobalLeaderboard();
+
     leaderboardEl.innerHTML = board.map((entry, i) =>
       `<div class="lb-row ${i === 0 ? 'lb-top' : ''}">
         <span class="lb-rank">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${i + 1}`}</span>
@@ -204,6 +212,26 @@
         <span class="lb-meta">streak ${entry.streak} · ${entry.date}</span>
       </div>`
     ).join('');
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function renderGlobalLeaderboard() {
+    const el = document.getElementById('global-leaderboard');
+    el.innerHTML = '<div class="lb-loading">Loading…</div>';
+    PlayCounter.getTopScores(GAME_ID).then(entries => {
+      if (!entries.length) { el.innerHTML = '<div class="lb-loading">No scores yet — be first!</div>'; return; }
+      el.innerHTML = entries.map((e, i) =>
+        `<div class="lb-row ${i === 0 ? 'lb-top' : ''}">
+          <span class="lb-rank">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</span>
+          <span class="lb-name">${escapeHtml(e.name)}</span>
+          <span class="lb-score">${e.score}</span>
+          <span class="lb-meta">streak ${e.streak} · ${e.date}</span>
+        </div>`
+      ).join('');
+    });
   }
 
   // Tap feedback bar to advance immediately
@@ -222,6 +250,18 @@
   });
 
   document.getElementById('btn-play-again').addEventListener('click', startGame);
+
+  document.getElementById('btn-submit-score').addEventListener('click', () => {
+    const nameInput = document.getElementById('player-name');
+    const name = nameInput.value.trim();
+    if (!name) { nameInput.focus(); return; }
+    localStorage.setItem('player_name', name);
+    const btn = document.getElementById('btn-submit-score');
+    btn.disabled = true;
+    btn.textContent = 'Saved!';
+    PlayCounter.submitScore(GAME_ID, name, state.score, state.bestStreak)
+      .then(renderGlobalLeaderboard);
+  });
 
   // Keyboard: 1-4 keys for tiles (desktop)
   document.addEventListener('keydown', e => {
