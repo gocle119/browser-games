@@ -179,10 +179,15 @@
     const pb2 = Scores.getPersonalBest('the-impostor');
     if (pb2 > 0) document.getElementById('pb-the-impostor').innerHTML = `Best<br><strong>${pb2}</strong>`;
 
+    const gameIds = ['real-or-fake', 'the-impostor'];
+    gameIds.forEach(id => {
+      const el = document.getElementById(`plays-${id}`);
+      if (el) el.textContent = '… plays';
+    });
     PlayCounter.getAll().then(counts => {
-      ['real-or-fake', 'the-impostor'].forEach(id => {
+      gameIds.forEach(id => {
         const el = document.getElementById(`plays-${id}`);
-        if (el && counts[id] > 0) el.textContent = counts[id].toLocaleString() + ' plays';
+        if (el) el.textContent = (counts[id] || 0).toLocaleString() + ' plays';
       });
     });
   </script>
