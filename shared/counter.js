@@ -14,7 +14,7 @@ const PlayCounter = (() => {
   }
 
   function increment(gameId) {
-    try { init(); db.ref(`plays/${gameId}`).transaction(v => (v || 0) + 1); } catch (e) {}
+    try { init(); db.ref(`plays/${gameId}`).set(firebase.database.ServerValue.increment(1)); } catch (e) {}
   }
 
   async function getAll() {
