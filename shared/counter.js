@@ -10,36 +10,56 @@ const PlayCounter = (() => {
   function init() {
     if (db) return;
     try { firebase.initializeApp(firebaseConfig); } catch (e) {}
-    db = firebase.database();
+    try {
+      db = firebase.database();
+    } catch (e) {
+      console.error('[PlayCounter] firebase.database() failed:', e);
+    }
   }
 
   function increment(gameId) {
-    try { init(); db.ref(`plays/${gameId}`).set(firebase.database.ServerValue.increment(1)); } catch (e) {}
+    try {
+      init();
+      if (!db) { console.error('[PlayCounter] No DB — increment skipped'); return; }
+      db.ref(`plays/${gameId}`)
+        .set(firebase.database.ServerValue.increment(1))
+        .then(() => console.log('[PlayCounter] increment ok:', gameId))
+        .catch(e => console.error('[PlayCounter] increment failed:', e));
+    } catch (e) { console.error('[PlayCounter] increment error:', e); }
   }
 
   async function getAll() {
-    try { init(); return (await db.ref('plays').once('value')).val() || {}; } catch (e) { return {}; }
+    try {
+      init();
+      if (!db) return {};
+      return (await db.ref('plays').once('value')).val() || {};
+    } catch (e) { console.error('[PlayCounter] getAll failed:', e); return {}; }
   }
 
   async function submitScore(gameId, name, score, streak) {
-    init();
-    await db.ref(`leaderboard/${gameId}`).push({
-      name: name.slice(0, 10),
-      score,
-      streak,
-      date: new Date().toISOString().slice(0, 10),
-    });
+    try {
+      init();
+      if (!db) throw new Error('No DB');
+      await db.ref(`leaderboard/${gameId}`).push({
+        name: name.slice(0, 10),
+        score,
+        streak,
+        date: new Date().toISOString().slice(0, 10),
+      });
+      console.log('[PlayCounter] submitScore ok');
+    } catch (e) { console.error('[PlayCounter] submitScore failed:', e); throw e; }
   }
 
   async function getTopScores(gameId, limit = 10) {
     try {
       init();
+      if (!db) return [];
       const snap = await db.ref(`leaderboard/${gameId}`)
         .orderByChild('score').limitToLast(limit).once('value');
       const entries = [];
       snap.forEach(c => entries.push(c.val()));
       return entries.sort((a, b) => b.score - a.score);
-    } catch (e) { return []; }
+    } catch (e) { console.error('[PlayCounter] getTopScores failed:', e); return []; }
   }
 
   return { increment, getAll, submitScore, getTopScores };
