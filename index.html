@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Word Vault — Browser Games</title>
+  <title>Arcade — Browser Games</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body { padding-bottom: 40px; }
@@ -97,12 +97,12 @@
 <body>
   <div class="container">
     <header class="site-header">
-      <h1>Word <span>Vault</span></h1>
-      <p>Simple word games · Track your best scores</p>
+      <h1>The <span>Arcade</span></h1>
+      <p>Simple browser games · Track your best scores</p>
     </header>
 
     <div class="section-label">Word Games</div>
-    <div class="game-row" id="word-games">
+    <div class="game-row">
       <a class="game-card active-game" href="games/real-or-fake/index.html">
         <div class="game-icon">🧠</div>
         <div class="game-info">
@@ -139,28 +139,31 @@
 
     <hr class="divider">
 
-    <div class="section-label">More Categories — Coming Soon</div>
-    <div class="category-grid">
-      <div class="category-tile disabled">
-        <div class="category-icon">♟️</div>
-        <div class="category-name">Strategy</div>
-        <div class="category-count">0 games</div>
-      </div>
-      <div class="category-tile disabled">
-        <div class="category-icon">🃏</div>
-        <div class="category-name">Card Games</div>
-        <div class="category-count">0 games</div>
-      </div>
-      <div class="category-tile disabled">
-        <div class="category-icon">🕹️</div>
-        <div class="category-name">Arcade</div>
-        <div class="category-count">0 games</div>
-      </div>
-      <div class="category-tile disabled">
-        <div class="category-icon">🧩</div>
-        <div class="category-name">Puzzles</div>
-        <div class="category-count">0 games</div>
-      </div>
+    <div class="section-label">Speed Games</div>
+    <div class="game-row">
+      <a class="game-card active-game" href="games/reaction-time/index.html">
+        <div class="game-icon">⚡</div>
+        <div class="game-info">
+          <div class="game-name">Reaction Time <span class="badge">Play</span></div>
+          <div class="game-desc">Wait for the flash, then tap as fast as you can. How quick are your reflexes?</div>
+        </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-reaction-time">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-reaction-time"></div>
+        </div>
+      </a>
+
+      <a class="game-card active-game" href="games/stop-the-bar/index.html">
+        <div class="game-icon">🎯</div>
+        <div class="game-info">
+          <div class="game-name">Stop the Bar <span class="badge">Play</span></div>
+          <div class="game-desc">A bar sweeps across the screen. Tap to stop it inside the target zone.</div>
+        </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-stop-the-bar">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-stop-the-bar"></div>
+        </div>
+      </a>
     </div>
 
     <footer>
@@ -171,19 +174,22 @@
   <script src="shared/scores.js"></script>
   <script src="shared/counter.js"></script>
   <script>
-    const pb1 = Scores.getPersonalBest('real-or-fake');
-    if (pb1 > 0) document.getElementById('pb-real-or-fake').innerHTML = `Best<br><strong>${pb1}</strong>`;
+    const allGames = [
+      { id: 'real-or-fake',   pbEl: 'pb-real-or-fake'   },
+      { id: 'the-impostor',   pbEl: 'pb-the-impostor'   },
+      { id: 'reaction-time',  pbEl: 'pb-reaction-time'  },
+      { id: 'stop-the-bar',   pbEl: 'pb-stop-the-bar'   },
+    ];
 
-    const pb2 = Scores.getPersonalBest('the-impostor');
-    if (pb2 > 0) document.getElementById('pb-the-impostor').innerHTML = `Best<br><strong>${pb2}</strong>`;
-
-    const gameIds = ['real-or-fake', 'the-impostor'];
-    gameIds.forEach(id => {
-      const el = document.getElementById(`plays-${id}`);
-      if (el) el.textContent = '… plays';
+    allGames.forEach(({ id, pbEl }) => {
+      const pb = Scores.getPersonalBest(id);
+      if (pb > 0) document.getElementById(pbEl).innerHTML = `Best<br><strong>${pb}</strong>`;
+      const playsEl = document.getElementById(`plays-${id}`);
+      if (playsEl) playsEl.textContent = '… plays';
     });
+
     PlayCounter.getAll().then(counts => {
-      gameIds.forEach(id => {
+      allGames.forEach(({ id }) => {
         const el = document.getElementById(`plays-${id}`);
         if (el) el.textContent = (counts[id] || 0).toLocaleString() + ' plays';
       });
