@@ -127,14 +127,29 @@
         </div>
       </a>
 
-      <div class="coming-soon-card">
-        <div class="game-icon">🎴</div>
+      <a class="game-card active-game" href="games/spell-it-right/index.html">
+        <div class="game-icon">✏️</div>
         <div class="game-info">
-          <div class="game-name">Anagram Tiles</div>
-          <div class="game-desc">Tap scrambled letter tiles in the right order.</div>
+          <div class="game-name">Spell It Right <span class="badge">Play</span></div>
+          <div class="game-desc">Four spellings, one is correct. Pick it before the clock runs out.</div>
         </div>
-        <div class="game-meta"><span class="badge" style="background:var(--surface2);color:var(--text-muted)">Soon</span></div>
-      </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-spell-it-right">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-spell-it-right"></div>
+        </div>
+      </a>
+
+      <a class="game-card active-game" href="games/unscramble/index.html">
+        <div class="game-icon">🔀</div>
+        <div class="game-info">
+          <div class="game-name">Unscramble <span class="badge">Play</span></div>
+          <div class="game-desc">Letters are all mixed up. Tap them in the right order to spell the word.</div>
+        </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-unscramble">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-unscramble"></div>
+        </div>
+      </a>
     </div>
 
     <hr class="divider">
@@ -175,10 +190,12 @@
   <script src="shared/counter.js"></script>
   <script>
     const allGames = [
-      { id: 'real-or-fake',   pbEl: 'pb-real-or-fake'   },
-      { id: 'the-impostor',   pbEl: 'pb-the-impostor'   },
-      { id: 'reaction-time',  pbEl: 'pb-reaction-time'  },
-      { id: 'stop-the-bar',   pbEl: 'pb-stop-the-bar'   },
+      { id: 'real-or-fake',    pbEl: 'pb-real-or-fake'    },
+      { id: 'the-impostor',    pbEl: 'pb-the-impostor'    },
+      { id: 'spell-it-right',  pbEl: 'pb-spell-it-right'  },
+      { id: 'unscramble',      pbEl: 'pb-unscramble'      },
+      { id: 'reaction-time',   pbEl: 'pb-reaction-time'   },
+      { id: 'stop-the-bar',    pbEl: 'pb-stop-the-bar'    },
     ];
 
     allGames.forEach(({ id, pbEl }) => {
