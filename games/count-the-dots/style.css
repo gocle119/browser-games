@@ -1,0 +1,65 @@
+#game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+#round-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+#dot-area {
+  position: relative;
+  width: min(280px, 85vw);
+  height: min(200px, 42vw);
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 2px solid var(--surface2);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+}
+
+#dot-area.hidden-dots .dot { opacity: 0; }
+
+#status-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-height: 1.5em;
+  text-align: center;
+}
+
+#choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: min(280px, 85vw);
+}
+
+.choice-btn {
+  padding: 20px 8px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 2px solid var(--surface2);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.1s, transform 0.1s;
+}
+.choice-btn:active { transform: scale(0.93); }
+.choice-btn:hover  { background: var(--surface2); }
+.choice-btn.correct { background: rgba(34,197,94,0.2);  border-color: var(--success); color: var(--success); }
+.choice-btn.close   { background: rgba(245,158,11,0.2); border-color: var(--accent);  color: var(--accent); }
+.choice-btn.wrong   { background: rgba(239,68,68,0.2);  border-color: var(--danger);  color: var(--danger); }
+.choice-btn:disabled { cursor: default; }

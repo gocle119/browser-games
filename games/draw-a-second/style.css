@@ -1,0 +1,47 @@
+#game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+#target-label {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -1px;
+}
+
+#status-label {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+#result-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 1.5em;
+  text-align: center;
+}
+
+#result-label.good  { color: var(--success); }
+#result-label.ok    { color: var(--accent); }
+#result-label.bad   { color: var(--danger); }
+
+#tap-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+#game-area.timing #status-label {
+  color: var(--accent);
+}
+
+#game-area.timing #target-label {
+  opacity: 0.3;
+}

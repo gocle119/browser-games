@@ -21,17 +21,19 @@ const PlayCounter = (() => {
   }
 
   async function submitScore(gameId, name, score, streak) {
-    const r = await fetch(`${DB}/leaderboard/${gameId}.json`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: name.slice(0, 10),
-        score,
-        streak,
-        date: new Date().toISOString().slice(0, 10),
-      }),
-    });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    try {
+      const r = await fetch(`${DB}/leaderboard/${gameId}.json`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.slice(0, 10),
+          score,
+          streak,
+          date: new Date().toISOString().slice(0, 10),
+        }),
+      });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    } catch (e) { console.error('[PlayCounter] submitScore failed:', e); throw e; }
   }
 
   async function getTopScores(gameId, limit = 10) {

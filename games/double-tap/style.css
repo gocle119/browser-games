@@ -1,0 +1,74 @@
+#game-area {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+#round-label {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#status-label {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  pointer-events: none;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+#circles-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.tap-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #000;
+  box-shadow: 0 0 20px rgba(245,158,11,0.5);
+  animation: circle-pop 0.15s ease-out;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s;
+}
+
+.tap-circle:active { transform: translate(-50%, -50%) scale(0.85); }
+
+.tap-circle.tapped {
+  background: var(--success);
+  box-shadow: 0 0 20px rgba(34,197,94,0.5);
+  animation: circle-tapped 0.25s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes circle-pop {
+  from { transform: translate(-50%,-50%) scale(0); }
+  to   { transform: translate(-50%,-50%) scale(1); }
+}
+
+@keyframes circle-tapped {
+  0%   { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%,-50%) scale(1.4); opacity: 0; }
+}
+
+#game-area.correct { background: rgba(34,197,94,0.08); }
+#game-area.wrong   { background: rgba(239,68,68,0.12); }

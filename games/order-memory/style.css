@@ -1,0 +1,67 @@
+#game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  gap: 16px;
+}
+
+#seq-display {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 80px;
+  flex-wrap: wrap;
+  max-width: 300px;
+}
+
+.seq-dot {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--surface2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  transition: transform 0.15s;
+}
+
+.seq-dot.active {
+  transform: scale(1.2);
+  background: var(--accent);
+}
+
+#status-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+#icon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: min(260px, 80vw);
+}
+
+.icon-btn {
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 2px solid var(--surface2);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.1s;
+}
+.icon-btn:active   { transform: scale(0.92); }
+.icon-btn:hover    { background: var(--surface2); }
+.icon-btn.lit      { background: var(--accent); transform: scale(1.08); }
+.icon-btn:disabled { opacity: 0.4; cursor: default; }
+
+#icon-grid.locked .icon-btn { cursor: default; pointer-events: none; }

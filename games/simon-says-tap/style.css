@@ -1,0 +1,50 @@
+#game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+#seq-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-align: center;
+  min-height: 1.4em;
+}
+
+#simon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: min(280px, 80vw);
+}
+
+.simon-btn {
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: filter 0.1s, transform 0.1s;
+  opacity: 0.45;
+}
+
+.simon-btn:active     { transform: scale(0.93); }
+.simon-btn.lit        { opacity: 1; filter: brightness(1.4); transform: scale(1.06); }
+.simon-btn.lit-input  { opacity: 1; filter: brightness(1.4); transform: scale(1.03); }
+
+#simon-grid.locked .simon-btn { cursor: default; pointer-events: none; }
+
+.simon-btn[data-idx="0"] { background: #ef4444; }
+.simon-btn[data-idx="1"] { background: #3b82f6; }
+.simon-btn[data-idx="2"] { background: #22c55e; }
+.simon-btn[data-idx="3"] { background: #f59e0b; }
+
+#status-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: center;
+  min-height: 1.4em;
+}

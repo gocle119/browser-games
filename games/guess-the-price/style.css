@@ -1,0 +1,80 @@
+#game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+#round-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+#product-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  width: min(300px, 90vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  border: 2px solid var(--surface2);
+}
+
+#product-emoji {
+  font-size: 3rem;
+}
+
+#product-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+#product-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+#threshold-label {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+#feedback-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  min-height: 1.5em;
+  text-align: center;
+  padding: 0 8px;
+}
+#feedback-label.correct { color: var(--success); }
+#feedback-label.wrong   { color: var(--danger); }
+
+#choice-row {
+  display: flex;
+  gap: 12px;
+  width: min(300px, 90vw);
+}
+
+.price-btn {
+  flex: 1;
+  padding: 16px 0;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 2px solid var(--surface2);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.1s, transform 0.1s;
+}
+.price-btn:active { transform: scale(0.95); }
+.price-btn:hover  { background: var(--surface2); }
+.price-btn:disabled { opacity: 0.4; cursor: default; }

@@ -37,9 +37,9 @@
   }
 
   function scrambleWord(word) {
+    if (word.length <= 1) return word.split('');
     const letters = word.split('');
     let result;
-    // Keep shuffling until the result isn't the same as the original
     do { result = shuffle(letters); } while (result.join('') === word);
     return result;
   }
@@ -172,8 +172,8 @@
         placed.clear();
         answer = [];
         tilePool.querySelectorAll('.pool-tile').forEach(t => t.classList.remove('used'));
-        inputLocked = false;
         if (state.lives <= 0) {
+        inputLocked = true;
           // Show the correct word then end
           Array.from(answerRow.children).forEach((s, i) => {
             s.textContent = puzzle.word[i];
@@ -182,6 +182,7 @@
           state.index++;
           setTimeout(endGame, 1500);
         } else {
+          inputLocked = false;
           startTimer(timeLimit); // restart timer for same puzzle
         }
       }, { once: true });

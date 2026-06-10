@@ -1,0 +1,81 @@
+#game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+#puzzle-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#round-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+#diff-badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+#diff-badge.d1 { background: rgba(34,197,94,0.2);  color: var(--success); }
+#diff-badge.d2 { background: rgba(245,158,11,0.2); color: var(--accent); }
+#diff-badge.d3 { background: rgba(239,68,68,0.2);  color: var(--danger); }
+
+#prompt-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+#number-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: min(280px, 85vw);
+}
+
+.num-tile {
+  padding: 24px 8px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 2px solid var(--surface2);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.1s, transform 0.1s, border-color 0.15s;
+}
+.num-tile:active { transform: scale(0.93); }
+.num-tile:hover  { background: var(--surface2); }
+
+.num-tile.correct { background: rgba(34,197,94,0.2);  border-color: var(--success); color: var(--success); }
+.num-tile.wrong   { background: rgba(239,68,68,0.2);  border-color: var(--danger);  color: var(--danger); animation: shake 0.3s ease; }
+.num-tile.reveal  { background: rgba(34,197,94,0.15); border-color: var(--success); }
+.num-tile:disabled { cursor: default; }
+
+#property-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-align: center;
+  min-height: 1.4em;
+  padding: 0 16px;
+  font-style: italic;
+}
+
+#number-grid.locked .num-tile { pointer-events: none; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-6px); }
+  75%       { transform: translateX(6px); }
+}
