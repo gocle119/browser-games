@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Split Second — Arcade</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="top-bar">
+    <a class="back-btn" href="../../index.html">← Home</a>
+    <div class="hud">
+      <div class="hud-item">
+        <span class="hud-label">Lives</span>
+        <span class="hud-value" id="lives">❤️❤️❤️</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Score</span>
+        <span class="hud-value" id="score">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Streak</span>
+        <span class="hud-value" id="streak">—</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timer-track">
+    <div id="timer-bar"></div>
+  </div>
+
+  <div id="game-area">
+    <div id="status-label">Round 1 of 15</div>
+    <div class="zone" id="zone-left"></div>
+    <div class="zone" id="zone-right"></div>
+  </div>
+
+  <div id="end-screen" hidden>
+    <div class="end-header">
+      <h2>Game Over</h2>
+      <p>Here's how you did</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-val" id="end-score">0</div>
+        <div class="stat-lbl">Score</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="end-streak">0</div>
+        <div class="stat-lbl">Best Streak</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="end-best">0</div>
+        <div class="stat-lbl">Personal Best</div>
+      </div>
+    </div>
+
+    <div class="lb-title">🌍 Global Top Scores</div>
+    <div id="global-leaderboard"><div class="lb-loading">Loading…</div></div>
+
+    <div class="global-submit">
+      <input type="text" id="player-name" maxlength="10" placeholder="Your name" autocomplete="off">
+      <button class="btn btn-accent" id="btn-submit-score">Submit</button>
+    </div>
+
+    <div class="lb-title">Your Scores</div>
+    <div id="leaderboard"></div>
+
+    <button class="btn btn-accent btn-full" id="btn-play-again">Play Again</button>
+    <a class="btn btn-ghost btn-full" href="../../index.html">Back to Home</a>
+  </div>
+
+  <script src="../../shared/scores.js"></script>
+  <script src="../../shared/counter.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

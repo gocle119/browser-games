@@ -150,6 +150,18 @@
           <div class="game-plays" id="plays-unscramble"></div>
         </div>
       </a>
+
+      <a class="game-card active-game" href="games/missing-letter/index.html">
+        <div class="game-icon">🔡</div>
+        <div class="game-info">
+          <div class="game-name">Missing Letter <span class="badge">Play</span></div>
+          <div class="game-desc">One letter's missing. Pick the right one before the clock runs out.</div>
+        </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-missing-letter">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-missing-letter"></div>
+        </div>
+      </a>
     </div>
 
     <hr class="divider">
@@ -177,6 +189,18 @@
         <div class="game-meta">
           <div class="game-pb" id="pb-stop-the-bar">Best<br><strong>—</strong></div>
           <div class="game-plays" id="plays-stop-the-bar"></div>
+        </div>
+      </a>
+
+      <a class="game-card active-game" href="games/blind-countdown/index.html">
+        <div class="game-icon">⏳</div>
+        <div class="game-info">
+          <div class="game-name">Blind Countdown <span class="badge">Play</span></div>
+          <div class="game-desc">Watch the number count down — then guess exactly when it silently hits zero.</div>
+        </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-blind-countdown">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-blind-countdown"></div>
         </div>
       </a>
     </div>
@@ -261,6 +285,30 @@
           <div class="game-plays" id="plays-odd-one-out"></div>
         </div>
       </a>
+
+      <a class="game-card active-game" href="games/over-or-under/index.html">
+        <div class="game-icon">🧮</div>
+        <div class="game-info">
+          <div class="game-name">Over or Under <span class="badge">Play</span></div>
+          <div class="game-desc">Numbers flash for a split second. Was their sum over or under the target?</div>
+        </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-over-or-under">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-over-or-under"></div>
+        </div>
+      </a>
+
+      <a class="game-card active-game" href="games/vowel-count/index.html">
+        <div class="game-icon">🔠</div>
+        <div class="game-info">
+          <div class="game-name">Vowel Count <span class="badge">Play</span></div>
+          <div class="game-desc">A word flashes for an instant. How many vowels did it have? Watch for Y…</div>
+        </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-vowel-count">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-vowel-count"></div>
+        </div>
+      </a>
     </div>
 
     <hr class="divider">
@@ -333,6 +381,40 @@
       </a>
     </div>
 
+    <hr class="divider">
+
+    <div class="section-label">Aim</div>
+    <div class="game-row">
+      <a class="game-card active-game" href="games/split-second/index.html">
+        <div class="game-icon">↔️</div>
+        <div class="game-info">
+          <div class="game-name">Split Second <span class="badge">Play</span></div>
+          <div class="game-desc">A dot flashes on one side — tap that half fast. Hollow dot means tap the OPPOSITE side.</div>
+        </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-split-second">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-split-second"></div>
+        </div>
+      </a>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-label">Perception</div>
+    <div class="game-row">
+      <a class="game-card active-game" href="games/level-check/index.html">
+        <div class="game-icon">📐</div>
+        <div class="game-info">
+          <div class="game-name">Level Check <span class="badge">Play</span></div>
+          <div class="game-desc">Is the line level or tilted? The tilt shrinks every round — trust your eye.</div>
+        </div>
+        <div class="game-meta">
+          <div class="game-pb" id="pb-level-check">Best<br><strong>—</strong></div>
+          <div class="game-plays" id="plays-level-check"></div>
+        </div>
+      </a>
+    </div>
+
     <footer>
       Scores saved on this device · No account needed
     </footer>
@@ -359,6 +441,12 @@
       { id: 'guess-the-price', pbEl: 'pb-guess-the-price' },
       { id: 'count-the-dots',  pbEl: 'pb-count-the-dots'  },
       { id: 'draw-a-second',   pbEl: 'pb-draw-a-second'   },
+      { id: 'missing-letter',  pbEl: 'pb-missing-letter'  },
+      { id: 'blind-countdown', pbEl: 'pb-blind-countdown' },
+      { id: 'over-or-under',   pbEl: 'pb-over-or-under'   },
+      { id: 'vowel-count',     pbEl: 'pb-vowel-count'     },
+      { id: 'split-second',    pbEl: 'pb-split-second'    },
+      { id: 'level-check',     pbEl: 'pb-level-check'     },
     ];
 
     allGames.forEach(({ id, pbEl }) => {
